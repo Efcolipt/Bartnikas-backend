@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,10 +21,12 @@ import { NewsModule } from './news/news.module';
         password: config.get('DATABASE_PASSWORD'),
         database: config.get('DATABASE_NAME'),
         autoLoadEntities: true,
-        synchronize: Boolean(config.get('IS_DEV')),
+        synchronize: config.get('IS_DEV') === 'true',
       }),
     }),
     NewsModule,
+    AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
