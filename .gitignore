@@ -35,3 +35,7 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .env
+
+# Upload files
+/upload/images/*
+!/upload/images/.gitkeep

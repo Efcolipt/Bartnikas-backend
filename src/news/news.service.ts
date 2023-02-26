@@ -17,7 +17,7 @@ export class NewsService {
     news.title = createNewsDto.title;
     news.desc = createNewsDto.desc;
     news.text = createNewsDto.text;
-    news.img = createNewsDto.img;
+    //news.img = createNewsDto.img;
     news.date = createNewsDto.date;
 
     return await this.newsRepository.save(news);

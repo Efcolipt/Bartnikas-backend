@@ -1,12 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { NewsModule } from './news/news.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      serveRoot: '/upload/images',
+      rootPath: join(__dirname, '..', 'upload/images'),
+    }),
+    // ВАЖНО! СОХРАНИТЬ КОММЕНТ ВЫШЕ ДЛЯ ОБСЛУЖИВАНИЯ ДРУГИХ ДИРЕКТОРИЙ ИЗ UPLOAD
+    // ServeStaticModule.forRoot({
+    //   serveRoot: '/upload/videos',
+    //   rootPath: join(__dirname, '..', 'upload/videos'),
+    // }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -27,6 +39,7 @@ import { UsersModule } from './users/users.module';
     NewsModule,
     AuthModule,
     UsersModule,
+    FilesModule,
   ],
 })
 export class AppModule {}

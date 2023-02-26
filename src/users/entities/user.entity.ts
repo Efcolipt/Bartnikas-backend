@@ -5,27 +5,17 @@ import {
   // CreateDateColumn,
   // UpdateDateColumn,
 } from 'typeorm';
-//import { Files } from '../.../files/entities/files.entity';
 
 @Entity()
-export class News {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  username: string;
 
   @Column()
-  desc: string;
-
-  @Column()
-  text: string;
-
-  // @HasMany(() => Files)
-  // files: Files[];
-
-  @Column({ type: 'timestamp' })
-  date: Date;
+  password: string;
 
   // @CreateDateColumn()
   // created_at: Date;
