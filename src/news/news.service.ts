@@ -36,26 +36,24 @@ export class NewsService {
   }
 
   async findOne(id: number) {
-    return await this.newsRepository.findOne({
+    const news = await this.newsRepository.findOne({
       where: { id },
       relations: {
         images: true,
       },
     });
-  }
 
-  async findPrev(id: number) {
-    return await this.newsRepository
+    const prev = await this.newsRepository
       .createQueryBuilder()
       .where('id < :id', { id })
       .getOne();
-  }
 
-  async findNext(id: number) {
-    return await this.newsRepository
+    const next = await this.newsRepository
       .createQueryBuilder()
       .where('id > :id', { id })
       .getOne();
+
+    return { ...news, prev, next };
   }
 
   async update(id: number, updateNewsDto: UpdateNewsDto) {

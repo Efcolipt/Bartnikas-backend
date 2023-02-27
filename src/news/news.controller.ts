@@ -32,16 +32,6 @@ export class NewsController {
     return this.newsService.findOne(id);
   }
 
-  @Get(':id/prev')
-  findPrev(@Param('id') id: number) {
-    return this.newsService.findPrev(id);
-  }
-
-  @Get(':id/next')
-  findNext(@Param('id') id: number) {
-    return this.newsService.findNext(id);
-  }
-
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateNewsDto: UpdateNewsDto) {
