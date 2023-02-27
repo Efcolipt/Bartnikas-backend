@@ -53,4 +53,10 @@ export class NewsController {
   remove(@Param('id') id: number) {
     return this.newsService.remove(id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id/image/:imageId')
+  removeImage(@Param('id') id: number, @Param('imageId') imageId: number) {
+    return this.newsService.removeImage(id, imageId);
+  }
 }

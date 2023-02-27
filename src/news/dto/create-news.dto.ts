@@ -2,6 +2,6 @@ export class CreateNewsDto {
   title: string;
   desc: string;
   text: string;
-  //img: string;
+  images: number[];
   date: Date;
 }

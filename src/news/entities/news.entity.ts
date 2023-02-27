@@ -2,10 +2,12 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
   // CreateDateColumn,
   // UpdateDateColumn,
 } from 'typeorm';
-//import { Files } from '../.../files/entities/files.entity';
+import { File } from '../../files/entities/file.entity';
 
 @Entity()
 export class News {
@@ -23,6 +25,10 @@ export class News {
 
   // @HasMany(() => Files)
   // files: Files[];
+
+  @ManyToMany(() => File, { cascade: true })
+  @JoinTable()
+  images: File[];
 
   @Column({ type: 'timestamp' })
   date: Date;

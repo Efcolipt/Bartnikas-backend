@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { CreateFileDto } from './dto/create-file.dto';
 import { File } from './entities/file.entity';
@@ -34,4 +34,10 @@ export class FilesService {
   // remove(id: number) {
   //   return `This action removes a #${id} file`;
   // }
+
+  async findByIds(ids: number[]) {
+    return await this.filesRepository.findBy({
+      id: In(ids),
+    });
+  }
 }
