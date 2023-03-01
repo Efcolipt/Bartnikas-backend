@@ -10,28 +10,16 @@ import {
 import { File } from '../../files/entities/file.entity';
 
 @Entity()
-export class News {
+export class ProjectImage {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  name: string;
 
-  @Column()
-  desc: string;
-
-  @Column()
-  text: string;
-
-  @Column('boolean', { default: false })
-  is_hot: boolean = false;
-
-  @ManyToMany(() => File, { cascade: true })
+  @ManyToMany(() => File, { cascade: true, eager: true })
   @JoinTable()
-  images: File[];
-
-  @Column({ type: 'timestamp' })
-  date: Date;
+  files: File[];
 
   // @CreateDateColumn()
   // created_at: Date;

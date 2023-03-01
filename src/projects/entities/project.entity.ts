@@ -7,10 +7,10 @@ import {
   // CreateDateColumn,
   // UpdateDateColumn,
 } from 'typeorm';
-import { File } from '../../files/entities/file.entity';
+import { ProjectImage } from './project-image.entity';
 
 @Entity()
-export class News {
+export class Project {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,18 +20,9 @@ export class News {
   @Column()
   desc: string;
 
-  @Column()
-  text: string;
-
-  @Column('boolean', { default: false })
-  is_hot: boolean = false;
-
-  @ManyToMany(() => File, { cascade: true })
+  @ManyToMany(() => ProjectImage, { cascade: true })
   @JoinTable()
-  images: File[];
-
-  @Column({ type: 'timestamp' })
-  date: Date;
+  project_images: ProjectImage[];
 
   // @CreateDateColumn()
   // created_at: Date;

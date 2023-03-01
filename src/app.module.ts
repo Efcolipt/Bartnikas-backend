@@ -5,6 +5,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { NewsModule } from './news/news.module';
 import { BlogsModule } from './blogs/blogs.module';
+import { ProjectsModule } from './projects/projects.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FilesModule } from './files/files.module';
@@ -39,6 +40,7 @@ import { FilesModule } from './files/files.module';
     }),
     NewsModule,
     BlogsModule,
+    ProjectsModule,
     AuthModule,
     UsersModule,
     FilesModule,

@@ -23,9 +23,6 @@ export class Blog {
   @Column()
   text: string;
 
-  // @HasMany(() => Files)
-  // files: Files[];
-
   @ManyToMany(() => File, { cascade: true })
   @JoinTable()
   images: File[];
