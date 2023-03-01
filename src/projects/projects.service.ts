@@ -106,12 +106,20 @@ export class ProjectsService {
   }
 
   async findOneImage(projectId: number, imageId: number) {
-    return await this.imageRepository.findOne({
+    // TODO сделать 1 запросом
+    const project = await this.projectRepository.findOne({
+      where: { id: projectId },
+      relations: {
+        project_images: true,
+      },
+    });
+    const image = await this.imageRepository.findOne({
       where: { id: imageId },
       relations: {
         files: true,
       },
     });
+    return { ...image, project };
   }
 
   async updateImage(

@@ -24,7 +24,6 @@ export class FilesController {
     @Body() createFileDto: any,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log(createFileDto);
     return await this.filesService.upload(createFileDto, file, 'image');
   }
 
