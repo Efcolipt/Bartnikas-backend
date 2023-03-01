@@ -10,7 +10,7 @@ import {
 import { File } from '../../files/entities/file.entity';
 
 @Entity()
-export class News {
+export class Blog {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,12 +22,6 @@ export class News {
 
   @Column()
   text: string;
-
-  @Column(
-    'boolean', 
-    { default: false },
-  )
-  is_hot: boolean = false;
 
   // @HasMany(() => Files)
   // files: Files[];

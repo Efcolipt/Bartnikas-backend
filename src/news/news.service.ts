@@ -56,6 +56,33 @@ export class NewsService {
     return { ...news, prev, next };
   }
 
+  async setHot(id: number) {
+    //TODO сделать 1 запросом
+    await this.newsRepository
+      .createQueryBuilder()
+      .update()
+      .set({ is_hot: false })
+      .execute();
+    return await this.newsRepository
+      .createQueryBuilder()
+      .update()
+      .set({ is_hot: true })
+      .where('id = :id', { id })
+      .execute();
+    // const sql = await this.newsRepository.update(
+    //   null,
+    //   { is_hot: false },
+    // );
+    //console.log(sql, id);
+    //return sql;
+
+    // return await this.newsRepository.find({
+    //   relations: {
+    //     images: true,
+    //   },
+    // });
+  }
+
   async update(id: number, updateNewsDto: UpdateNewsDto) {
     const toUpdate = await this.newsRepository.findOneBy({ id });
     const images = await this.filesService.findByIds(updateNewsDto.images);
@@ -74,11 +101,9 @@ export class NewsService {
         images: true,
       },
     });
-    console.log(id, imageId, news);
     news.images = news.images.filter((image) => {
       return image.id != imageId;
     });
-    console.log(id, imageId, news);
     return await this.newsRepository.save(news);
   }
 }

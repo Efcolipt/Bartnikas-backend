@@ -33,6 +33,12 @@ export class NewsController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Post(':id/set-hot')
+  setHot(@Param('id') id: number) {
+    return this.newsService.setHot(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateNewsDto: UpdateNewsDto) {
     return this.newsService.update(id, updateNewsDto);
