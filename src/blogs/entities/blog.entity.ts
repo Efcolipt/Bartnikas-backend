@@ -17,10 +17,10 @@ export class Blog {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   desc: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   text: string;
 
   @ManyToMany(() => File, { cascade: true })

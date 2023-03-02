@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { FilesService } from '../files/files.service';
 import { CreateNewsDto, UpdateNewsDto } from './dto';
 import { News } from './entities/news.entity';
+import { seeds } from './data/seeds';
 
 @Injectable()
 export class NewsService {
@@ -105,5 +106,24 @@ export class NewsService {
       return image.id != imageId;
     });
     return await this.newsRepository.save(news);
+  }
+
+  async seed() {
+    for (const seed of seeds) {
+      let news = await this.newsRepository.findOneBy({ title: seed.title });
+      if (news) return;
+      news = new News();
+
+      const image = await this.filesService.findOneBy({ name: seed.imageName });
+
+      news.title = seed.title;
+      news.desc = seed.desc;
+      news.text = seed.text;
+      news.is_hot = seed.is_hot;
+      news.images = [image];
+      news.date = new Date();
+
+      await this.newsRepository.save(news);
+    }
   }
 }

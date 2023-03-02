@@ -39,3 +39,4 @@ lerna-debug.log*
 # Upload files
 /upload/images/*
 !/upload/images/.gitkeep
+!/upload/images/noroot.png

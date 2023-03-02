@@ -17,10 +17,10 @@ export class News {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   desc: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   text: string;
 
   @Column('boolean', { default: false })

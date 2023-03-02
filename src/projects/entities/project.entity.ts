@@ -17,7 +17,7 @@ export class Project {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ type: 'longtext' })
   desc: string;
 
   @ManyToMany(() => ProjectImage, { cascade: true })
