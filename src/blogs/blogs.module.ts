@@ -9,5 +9,6 @@ import { BlogsController } from './blogs.controller';
   imports: [TypeOrmModule.forFeature([Blog]), FilesModule],
   controllers: [BlogsController],
   providers: [BlogsService],
+  exports: [BlogsService],
 })
 export class BlogsModule {}

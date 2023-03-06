@@ -10,6 +10,7 @@ import {
 } from './dto';
 import { Project } from './entities/project.entity';
 import { ProjectImage } from './entities/project-image.entity';
+import { seeds } from './data/seeds';
 
 @Injectable()
 export class ProjectsService {
@@ -153,5 +154,36 @@ export class ProjectsService {
       return file.id != fileId;
     });
     return await this.imageRepository.save(image);
+  }
+
+  async seed() {
+    for (const seed of seeds) {
+      let project = await this.projectRepository.findOneBy({ title: seed.title });
+      if (project) continue;
+      project = new Project();
+
+      project.title = seed.title;
+      project.desc = seed.desc;
+
+      const projectImages = [];
+
+      for (const project_image of seed.project_images) {
+        let projectImage = await this.imageRepository.findOneBy({ name: project_image.name });
+        if (projectImage) continue;
+        projectImage = new ProjectImage();
+
+        const image = await this.filesService.findOneBy({ name: project_image.fileName });
+
+        projectImage.name = project_image.name;
+        projectImage.files = [image];
+        const projectImageSaved = await this.imageRepository.save(projectImage);
+        projectImages.push(projectImageSaved);
+      }
+
+      await this.projectRepository.save({
+        ...project,
+        project_images: projectImages,
+      });
+    }
   }
 }

@@ -53,7 +53,7 @@ export class FilesService {
 
     for (const s of seeds) {
       let file = await this.filesRepository.findOneBy({ name: s.name });
-      if (file) return;
+      if (file) continue;
       file = new File();
 
       const toUpdate = Object.assign(file, {

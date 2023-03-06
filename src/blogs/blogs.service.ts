@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { FilesService } from '../files/files.service';
 import { CreateBlogDto, UpdateBlogDto } from './dto';
 import { Blog } from './entities/blog.entity';
+import { seeds } from './data/seeds';
 
 @Injectable()
 export class BlogsService {
@@ -78,5 +79,23 @@ export class BlogsService {
       return image.id != imageId;
     });
     return await this.blogRepository.save(blog);
+  }
+
+  async seed() {
+    for (const seed of seeds) {
+      let blog = await this.blogRepository.findOneBy({ title: seed.title });
+      if (blog) continue;
+      blog = new Blog();
+
+      const image = await this.filesService.findOneBy({ name: seed.imageName });
+
+      blog.title = seed.title;
+      blog.desc = seed.desc;
+      blog.text = seed.text;
+      blog.images = [image];
+      blog.date = new Date();
+
+      await this.blogRepository.save(blog);
+    }
   }
 }

@@ -111,7 +111,7 @@ export class NewsService {
   async seed() {
     for (const seed of seeds) {
       let news = await this.newsRepository.findOneBy({ title: seed.title });
-      if (news) return;
+      if (news) continue;
       news = new News();
 
       const image = await this.filesService.findOneBy({ name: seed.imageName });

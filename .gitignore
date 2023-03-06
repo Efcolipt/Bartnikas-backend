@@ -40,3 +40,8 @@ lerna-debug.log*
 /upload/images/*
 !/upload/images/.gitkeep
 !/upload/images/noroot.png
+!/upload/images/20210401_-_Art_0152.jpg
+!/upload/images/CF001765_1.jpg
+!/upload/images/_DSF1925.jpg
+!/upload/images/_DSF1864.jpg
+!/upload/images/_DSF0553.jpg
