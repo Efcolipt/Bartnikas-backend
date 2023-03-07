@@ -47,6 +47,7 @@ export class BlogsService {
     const prev = await this.blogRepository
       .createQueryBuilder()
       .where('id < :id', { id })
+      .orderBy('id', 'DESC')
       .getOne();
 
     const next = await this.blogRepository

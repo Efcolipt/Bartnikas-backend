@@ -47,6 +47,7 @@ export class NewsService {
     const prev = await this.newsRepository
       .createQueryBuilder()
       .where('id < :id', { id })
+      .orderBy('id', 'DESC')
       .getOne();
 
     const next = await this.newsRepository
