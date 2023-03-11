@@ -11,7 +11,7 @@ async function bootstrap() {
   app.use('/', express.static('files'));
 
   const config = app.get(ConfigService);
-  const port = Number(config.get('APP_PORT'));
+  const port = Number(config.get('APP_PORT_INNER'));
   await app.listen(port);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
